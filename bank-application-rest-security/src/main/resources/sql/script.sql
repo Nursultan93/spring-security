@@ -28,4 +28,4 @@ create table customer
 
 insert into users value (null,'happy', '123', 1);
 insert into authorities value (null,'happy', 'write');
-insert into customer value(null, 'nursultan@gmail.com', '123', 'admin');
+insert into customer value(null, 'test@gmail.com', '123', 'admin');
