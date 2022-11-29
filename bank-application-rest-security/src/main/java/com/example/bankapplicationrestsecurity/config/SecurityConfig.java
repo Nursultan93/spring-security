@@ -39,8 +39,12 @@ public class SecurityConfig {
                 .csrf().ignoringAntMatchers("/contact").csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/account", "/balance", "/loan", "/cards").authenticated()
+                .antMatchers("/loan").hasAuthority("VIEWLOAN")
+                .antMatchers("/account").hasAnyAuthority("VIEWACCOUNT", "VEIWCARDS")
+                .antMatchers("/balance").hasAuthority("VIEWBALANCE")
+                .antMatchers("/card").hasAuthority("VEIWCARDS")
                 .antMatchers("/contact", "/notice", "/auth/**").permitAll()
+                .anyRequest().authenticated()
                 .and().httpBasic()
                 .and().formLogin();
 
