@@ -26,6 +26,17 @@ create table customer
         primary key (id)
 );
 
-insert into users value (null,'happy', '123', 1);
+insert into users value (null,'happy', '$2a$10$OFnbky.dNVNWQyErZeXh3uLGxF62KrRSsEPkKOXXkgw0J0jI5ebxu', 1);
 insert into authorities value (null,'happy', 'write');
-insert into customer value(null, 'test@gmail.com', '123', 'admin');
+insert into customer value(null, 'test@gmail.com', '$2a$10$OFnbky.dNVNWQyErZeXh3uLGxF62KrRSsEPkKOXXkgw0J0jI5ebxu', 'admin');
+
+
+insert into authorities values(1, 1, 'VIEWACCOUNT');
+insert into authorities values(2, 1, 'VIEWCARD');
+insert into authorities values(3, 1, 'VIEWLOAN');
+insert into authorities values(4, 1, 'VIEWBALANCE');
+
+
+insert into authorities values(1, 1, 'ROLE_ADMIN');
+insert into authorities values(2, 1, 'ROLE_USER');
+insert into authorities values(3, 1, 'ROLE_MANAGER');
