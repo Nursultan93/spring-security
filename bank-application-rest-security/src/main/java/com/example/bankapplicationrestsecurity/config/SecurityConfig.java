@@ -1,5 +1,8 @@
 package com.example.bankapplicationrestsecurity.config;
 
+import com.example.bankapplicationrestsecurity.filter.AuthoritiesLogginAtFilter;
+import com.example.bankapplicationrestsecurity.filter.AuthoritiesLogginAtferFilter;
+import com.example.bankapplicationrestsecurity.filter.RequestValidationBeforeFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
@@ -38,6 +42,9 @@ public class SecurityConfig {
                 .and()
                 .csrf().ignoringAntMatchers("/contact").csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
+                .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
+                .addFilterAt(new AuthoritiesLogginAtFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new AuthoritiesLogginAtferFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/loan").hasRole("ADMIN")
                 .antMatchers("/account").hasAnyRole("ADMIN", "USER")
