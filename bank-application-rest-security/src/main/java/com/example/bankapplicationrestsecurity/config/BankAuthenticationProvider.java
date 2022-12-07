@@ -21,7 +21,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class BankAutenticationProvider implements AuthenticationProvider {
+public class BankAuthenticationProvider implements AuthenticationProvider {
 
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
