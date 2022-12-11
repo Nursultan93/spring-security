@@ -55,7 +55,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/loan").hasRole("ADMIN")
                 .antMatchers("/account").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/balance").hasRole("MANAGER")
+                .antMatchers("/balance").authenticated()
                 .antMatchers("/card").hasRole("MODERATOR")
                 .antMatchers("/contact", "/notice", "/auth/**").permitAll()
                 .anyRequest().authenticated()
